@@ -9,6 +9,7 @@ interface CardProps {
   medium_cover_image: string;
   description: string;
   rating: string;
+  genre: string;
 }
 
 export const Card: FC<CardProps> = ({
@@ -18,6 +19,7 @@ export const Card: FC<CardProps> = ({
   medium_cover_image,
   description,
   rating,
+  genre,
 }) => {
   const [mouseOver, setMouseOver] = useState(false);
   const toggleMouseOver = () => setMouseOver((prev) => !prev);
@@ -31,7 +33,7 @@ export const Card: FC<CardProps> = ({
     <div
       onMouseOver={toggleMouseOver}
       onMouseOut={toggleMouseOver}
-      className=" bg-white border border-black basis-80 object-cover rounded ml-3 mb-3 cursor-pointer relative"
+      className=" bg-white border border-black basis-80 object-cover rounded ml-5 mb-6 cursor-pointer relative"
       onClick={!mouseOver ? onFilmClick : () => {}}>
       {mouseOver && (
         <div
@@ -54,9 +56,11 @@ export const Card: FC<CardProps> = ({
       />
 
       <div className="flex flex-col p-5 max-w-xs">
-        <span className="text-extrabold text-xl text-rose-400">{title}</span>
+        <span className="text-extrabold text-xl text-rose-400">
+          {title} {year}
+        </span>
         <span>{description?.slice(0, 60)}...</span>
-        <span className="ml-auto text-rose-500">{year}</span>
+        <span className="mt-auto">{genre}</span>
       </div>
     </div>
   );

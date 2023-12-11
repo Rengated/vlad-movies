@@ -40,7 +40,7 @@ const Details: FC = () => {
   }, [id]);
 
   return (
-    <>
+    <div className="py-20">
       <Header arrowBack={true} />
       {!loading ? (
         <section className="min-h-screen flex items-center flex-col pb-20 px-4 relative">
@@ -142,7 +142,7 @@ const Details: FC = () => {
           />
         </div>
       )}
-    </>
+    </div>
   );
 };
 

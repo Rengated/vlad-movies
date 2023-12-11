@@ -24,7 +24,7 @@ export default function Home() {
   }, [currentPage]);
 
   return (
-    <>
+    <div className="pt-20">
       <Header arrowBack={false} />
       {!loading ? (
         <main className="min-h-screen flex justify-center">
@@ -36,6 +36,7 @@ export default function Home() {
                   key={index}
                   id={item.id}
                   rating={item.rating}
+                  genre={item.genres[0]}
                   description={item.description_full || item.summary}
                   title={item.title}
                   year={item.year}
@@ -63,6 +64,6 @@ export default function Home() {
           />
         </div>
       )}
-    </>
+    </div>
   );
 }

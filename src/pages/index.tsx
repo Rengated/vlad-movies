@@ -1,8 +1,9 @@
-import { getFilms } from "@/api";
+import { MovieList, getFilms } from "@/api";
 import { Card } from "@/components/Card/Card";
 import { useEffect, useState } from "react";
-import ResponsivePagination from "react-responsive-pagination";
 import { Audio } from "react-loader-spinner";
+import { Header } from "@/components/Header/Header";
+import ResponsivePagination from "react-responsive-pagination";
 import "react-responsive-pagination/themes/minimal.css";
 
 export default function Home() {
@@ -24,15 +25,18 @@ export default function Home() {
 
   return (
     <>
+      <Header arrowBack={false} />
       {!loading ? (
         <main className="min-h-screen flex justify-center">
           <section className="flex flex-col items-center container py-20">
             <h1 className="text-3xl mb-10 mx-auto text-rose-300">FILMS</h1>
             <div className="flex flex-wrap justify-center mb-20">
-              {films?.map((item: any, index) => (
+              {films?.map((item: MovieList, index) => (
                 <Card
                   key={index}
                   id={item.id}
+                  rating={item.rating}
+                  description={item.description_full || item.summary}
                   title={item.title}
                   year={item.year}
                   medium_cover_image={item.medium_cover_image}

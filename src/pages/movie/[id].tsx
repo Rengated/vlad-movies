@@ -1,12 +1,17 @@
 "use client";
 import { getFilmById } from "@/api";
-import { FC, useEffect, useState } from "react";
+import { FC, useContext, useEffect, useState } from "react";
 import { MovieList } from "@/api";
 import { useParams } from "next/navigation";
 import { Audio } from "react-loader-spinner";
 import { useComments } from "../../hooks/useComments";
 import { Header } from "@/components/Header/Header";
+import { Theme } from "@/store/theme";
+import cd from "../../../public/static/cd.png";
+import file from "../../../public/static/file.png";
+import res from "../../../public/static/res.png";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 const Details: FC = () => {
   const [movieDetails, setMovieDetails] = useState<MovieList>();
@@ -17,6 +22,8 @@ const Details: FC = () => {
   });
   const id = useParams()?.id;
   const { comments, updateComments } = useComments(id);
+  const { currentTheme } = useContext(Theme);
+  const router = useRouter();
 
   const onCommentChange = (e) => {
     setComment((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -40,7 +47,10 @@ const Details: FC = () => {
   }, [id]);
 
   return (
-    <div className="py-20">
+    <div
+      className={`py-20 ${
+        currentTheme == "black" ? "bg-sky-950" : "bg-indigo-300"
+      }`}>
       <Header arrowBack={true} />
       {!loading ? (
         <section className="min-h-screen flex items-center flex-col pb-20 px-4 relative">
@@ -53,35 +63,55 @@ const Details: FC = () => {
             className="absolute -z-index-1 opacity-60 w-full brightness-50 p-10"
           />
           <div className="container py-20 flex flex-col lg:flex-row items-start">
-            <div
-              style={{
-                minWidth: "300px",
-                width: "100%",
-                maxWidth: "400px",
-                minHeight: "600px",
-                position: "relative",
-              }}
-              className="mb-5">
-              <Image
-                layout="fill"
-                loading="lazy"
-                src={movieDetails?.large_cover_image || ""}
-                alt={movieDetails?.title || ""}
-              />
+            <div>
+              <div
+                style={{
+                  minWidth: "300px",
+                  width: "100%",
+                  maxWidth: "400px",
+                  minHeight: "600px",
+                  position: "relative",
+                }}
+                className="mb-5">
+                <Image
+                  layout="fill"
+                  loading="lazy"
+                  src={movieDetails?.large_cover_image || ""}
+                  alt={movieDetails?.title || ""}
+                />
+              </div>
+              <div className="flex justify-between">
+                <button
+                  onClick={() => {
+                    router.push(movieDetails?.url || "");
+                  }}
+                  className="py-4 px-6 lex items-center justify-center border text-white bg-rose-300 font-extrabold cursor-pointer rounded-md hover:bg-rose-600">
+                  Watch now
+                </button>
+                <button
+                  onClick={() => {
+                    router.push(movieDetails?.url || "");
+                  }}
+                  className="py-4 px-6 flex-items-center justify-center border bg-rose-300 font-extrabold cursor-pointer text-white rounded-md hover:bg-rose-600">
+                  Download
+                </button>
+              </div>
             </div>
 
-            <div className="flex  lg:pl-20 flex-col">
+            <div className="flex  lg:pl-20 flex-col w-full">
               <p className="text-white text-3xl mb-2">
                 Title: {movieDetails?.title}
               </p>
-              <p className="text-gray-400 text-xl mb-2">
-                description: {movieDetails?.description_full}
-              </p>
+              {movieDetails?.description_full && (
+                <p className="text-gray-200 text-xl mb-2">
+                  {movieDetails?.description_full}
+                </p>
+              )}
               <p className="text-white mb-3 text-xl flex flex-wrap  items-center">
                 Genres:
                 {movieDetails?.genres?.map((genre, index) => (
                   <b
-                    className="bg-rose-700 p-2 text-base rounded-md ml-2 mb-3"
+                    className="bg-rose-200 p-2 text-base rounded-md ml-2 mb-3"
                     key={index}>
                     {genre}
                   </b>
@@ -96,6 +126,33 @@ const Details: FC = () => {
               <p className="text-white text-xl mb-2">
                 Runtime: {movieDetails?.runtime}
               </p>
+              <div className="flex flex-col mt-5 ">
+                {movieDetails?.torrents?.map((torrent, index) => (
+                  <a
+                    href={torrent.url}
+                    key={index}
+                    className="flex border-2  bg-sky-600 p-5 text-black mb-2 rounded-md items-center border-transparent hover:bg-sky-500">
+                    <Image
+                      src={res}
+                      alt="res"
+                      className="mr-4"
+                    />
+                    <span className="mr-4">{torrent.quality}</span>
+                    <Image
+                      src={file}
+                      alt="file"
+                      className="mr-4"
+                    />
+                    <span className="mr-4">{torrent.size}</span>
+                    <Image
+                      src={cd}
+                      alt="cd"
+                      className=""
+                    />
+                    <span>{torrent.type}</span>
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
           <div className="container flex flex-col">

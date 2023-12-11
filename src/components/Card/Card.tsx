@@ -10,6 +10,7 @@ interface CardProps {
   description: string;
   rating: string;
   genre: string;
+  filter: boolean;
 }
 
 export const Card: FC<CardProps> = ({
@@ -19,6 +20,7 @@ export const Card: FC<CardProps> = ({
   medium_cover_image,
   description,
   rating,
+  filter,
   genre,
 }) => {
   const [mouseOver, setMouseOver] = useState(false);
@@ -28,6 +30,10 @@ export const Card: FC<CardProps> = ({
   const onFilmClick = () => {
     router.push(`/movie/${id}`);
   };
+
+  if (!description && filter) {
+    return null;
+  }
 
   return (
     <div
@@ -60,7 +66,7 @@ export const Card: FC<CardProps> = ({
           {title} {year}
         </span>
         <span>{description?.slice(0, 60)}...</span>
-        <span className="mt-auto">{genre}</span>
+        <span className="mt-auto font-extrabold">{genre}</span>
       </div>
     </div>
   );

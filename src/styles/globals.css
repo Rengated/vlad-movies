@@ -19,7 +19,6 @@
 }
 
 body{
-    background-color: #121a2a;
     background-size: cover;
     background-repeat: no-repeat;
     background-image: url('../../public/static/background.png');
@@ -33,6 +32,6 @@ body{
     z-index: 5;
 }
 
-header{
-    background: #252c39;
+.header-bg{
+    background: #1e3154;
 }

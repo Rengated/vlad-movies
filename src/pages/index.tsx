@@ -31,7 +31,9 @@ export default function Home() {
 
   return (
     <div
-      className={`pt-20 ${currentTheme == "black" ? "bg-sky-950" : "A4C8F2"}`}>
+      className={`pt-20 ${
+        currentTheme == "black" ? "bg-sky-950" : "A4C8F2"
+      } bg`}>
       <Header arrowBack={false} />
       {!loading ? (
         <main className="min-h-screen flex justify-center">

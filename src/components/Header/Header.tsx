@@ -20,7 +20,7 @@ export const Header: FC<HeaderProps> = ({ arrowBack }) => {
   return (
     <header
       className={`flex px-20  w-full py-1 border-b-2 justify-between items-center fixed top-0 left-0   ${
-        currentTheme == "black" ? "header-bg" : "bg-black"
+        currentTheme == "black" ? "header-bg" : "A638EC0"
       }`}
       style={{ zIndex: 6 }}>
       <h1 className="text-3xl flex text-white leading-loose ">YSMLreska</h1>

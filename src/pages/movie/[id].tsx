@@ -7,11 +7,11 @@ import { Audio } from "react-loader-spinner";
 import { useComments } from "../../hooks/useComments";
 import { Header } from "@/components/Header/Header";
 import { Theme } from "@/store/theme";
+import { useRouter } from "next/router";
 import cd from "../../../public/static/cd.png";
 import file from "../../../public/static/file.png";
 import res from "../../../public/static/res.png";
 import Image from "next/image";
-import { useRouter } from "next/router";
 
 const Details: FC = () => {
   const [movieDetails, setMovieDetails] = useState<MovieList>();
@@ -21,6 +21,7 @@ const Details: FC = () => {
     text: "",
   });
   const id = useParams()?.id;
+  const [showDownload, setShowDownlad] = useState(false);
   const { comments, updateComments } = useComments(id);
   const { currentTheme } = useContext(Theme);
   const router = useRouter();
@@ -48,9 +49,7 @@ const Details: FC = () => {
 
   return (
     <div
-      className={`py-20 ${
-        currentTheme == "black" ? "bg-sky-950" : "bg-indigo-300"
-      }`}>
+      className={`py-20 ${currentTheme == "black" ? "bg-sky-950" : "A4C8F2"}`}>
       <Header arrowBack={true} />
       {!loading ? (
         <section className="min-h-screen flex items-center flex-col pb-20 px-4 relative">
@@ -90,7 +89,7 @@ const Details: FC = () => {
                 </button>
                 <button
                   onClick={() => {
-                    router.push(movieDetails?.url || "");
+                    setShowDownlad(true);
                   }}
                   className="py-4 px-6 flex-items-center justify-center border bg-rose-300 font-extrabold cursor-pointer text-white rounded-md hover:bg-rose-600">
                   Download
@@ -125,31 +124,38 @@ const Details: FC = () => {
                 Runtime: {movieDetails?.runtime}
               </p>
               <div className="flex flex-col mt-5 ">
-                {movieDetails?.torrents?.map((torrent, index) => (
-                  <a
-                    href={torrent.url}
-                    key={index}
-                    className="flex border-2  bg-sky-600 p-5 text-black mb-2 rounded-md items-center border-transparent hover:bg-sky-500">
-                    <Image
-                      src={res}
-                      alt="res"
-                      className="mr-4"
-                    />
-                    <span className="mr-4">{torrent.quality}</span>
-                    <Image
-                      src={file}
-                      alt="file"
-                      className="mr-4"
-                    />
-                    <span className="mr-4">{torrent.size}</span>
-                    <Image
-                      src={cd}
-                      alt="cd"
-                      className=""
-                    />
-                    <span>{torrent.type}</span>
-                  </a>
-                ))}
+                {showDownload &&
+                  movieDetails?.torrents?.map((torrent, index) => (
+                    <a
+                      href={torrent.url}
+                      key={index}
+                      className="flex border-2  bg-rose-300 p-5 text-black mb-2 rounded-md items-center border-transparent hover:bg-rose-500">
+                      <Image
+                        src={res}
+                        alt="res"
+                        className="mr-4 invert"
+                      />
+                      <span className="mr-4  font-extrabold text-white">
+                        {torrent.quality}
+                      </span>
+                      <Image
+                        src={file}
+                        alt="file"
+                        className="mr-4 invert"
+                      />
+                      <span className="mr-4  font-extrabold text-white">
+                        {torrent.size}
+                      </span>
+                      <Image
+                        src={cd}
+                        alt="cd"
+                        className="invert"
+                      />
+                      <span className=" font-extrabold text-white">
+                        {torrent.type}
+                      </span>
+                    </a>
+                  ))}
               </div>
             </div>
           </div>

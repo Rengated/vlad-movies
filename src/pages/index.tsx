@@ -31,22 +31,24 @@ export default function Home() {
 
   return (
     <div
-      className={`pt-20 ${
-        currentTheme == "black" ? "bg-sky-950" : "bg-indigo-300"
-      }`}>
+      className={`pt-20 ${currentTheme == "black" ? "bg-sky-950" : "A4C8F2"}`}>
       <Header arrowBack={false} />
       {!loading ? (
         <main className="min-h-screen flex justify-center">
           <section className="flex flex-col items-center container py-20">
             <div className="flex items-center-center w-full mb-10 flex-col">
-              <h1 className="text-3xl  mx-auto justify-center text-rose-300 mb-2">
+              <h1
+                className={`text-3xl  mx-auto justify-center ${
+                  currentTheme == "black" ? "text-rose-300" : "CE007C"
+                } mb-2 font-extrabold`}>
                 FILMS
               </h1>
-              <div className="flex justify-center">
-                <p className="text-white">
+              <div className="flex justify-center items-center">
+                <p className="text-white font-extrabold">
                   Show films only with description
                   <input
                     type="checkbox"
+                    className="ml-4 scale-150"
                     defaultChecked={checked}
                     onChange={() => setChecked((prev) => !prev)}
                   />

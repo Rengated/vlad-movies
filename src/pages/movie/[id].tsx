@@ -49,9 +49,7 @@ const Details: FC = () => {
 
   return (
     <div
-      className={`py-20 ${
-        currentTheme == "black" ? "bg-sky-950" : "A4C8F2"
-      } bg`}>
+      className={`py-20 ${currentTheme == "black" ? "Ob1127" : "A4C8F2"} bg`}>
       <Header arrowBack={true} />
       {!loading ? (
         <section className="min-h-screen flex items-center flex-col pb-20 px-4 relative">

@@ -56,11 +56,11 @@ const Details: FC = () => {
         <section className="min-h-screen flex items-center flex-col pb-20 px-4 relative">
           <Image
             src={movieDetails?.background_image}
-            width={800}
-            height={400}
+            width={900}
+            height={500}
             alt="bg"
-            style={{ maxHeight: "750px", objectFit: "cover" }}
-            className="absolute -z-index-1 opacity-60 w-full brightness-50 p-10"
+            style={{ maxHeight: "730px", height: "730px", objectFit: "cover" }}
+            className="absolute  opacity-60 w-full brightness-50 p-10"
           />
           <div className="container py-20 flex flex-col lg:flex-row items-start">
             <div>
@@ -98,10 +98,8 @@ const Details: FC = () => {
               </div>
             </div>
 
-            <div className="flex  lg:pl-20 flex-col w-full">
-              <p className="text-white text-3xl mb-2">
-                Title: {movieDetails?.title}
-              </p>
+            <div className="flex  lg:pl-20 flex-col w-full z-index-5">
+              <p className="text-white text-3xl mb-2">{movieDetails?.title}</p>
               {movieDetails?.description_full && (
                 <p className="text-gray-200 text-xl mb-2">
                   {movieDetails?.description_full}

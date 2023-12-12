@@ -165,11 +165,13 @@ const Details: FC = () => {
             <input
               name="name"
               onChange={onCommentChange}
+              value={comment.name}
               type="text"
               className="w-80 bg-transparent border-2 p-2 mb-2 rounded-md text-white"
             />
             <p className="text-white mb-2">Comment</p>
             <textarea
+              value={comment.text}
               onChange={onCommentChange}
               name="text"
               className="w-full bg-transparent border-2 p-2 rounded-md text-white"

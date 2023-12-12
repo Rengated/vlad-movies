@@ -22,7 +22,7 @@ const Details: FC = () => {
   });
   const id = useParams()?.id;
   const [showDownload, setShowDownlad] = useState(false);
-  const { comments, updateComments } = useComments(id);
+  const { comments, updateComments, deleteComment } = useComments(id);
   const { currentTheme } = useContext(Theme);
   const router = useRouter();
 
@@ -189,6 +189,11 @@ const Details: FC = () => {
                     className="flex flex-col border bg-gray-800 w-full p-5 text-white rounded-md mb-3">
                     <p className="text-xl extrabold mb-2">{comment.name}</p>
                     <p className="text-gray-500">{comment.text}</p>
+                    <button
+                      onClick={() => deleteComment(comment)}
+                      className="ml-auto font-extrabold hover:text-rose-200">
+                      DELETE
+                    </button>
                   </div>
                 ))}
             </div>

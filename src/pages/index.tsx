@@ -27,8 +27,6 @@ export default function Home() {
     fetch();
   }, [currentPage]);
 
-  console.log(checked);
-
   return (
     <div
       className={`pt-20 ${currentTheme == "black" ? "Ob1127" : "A4C8F2"} bg`}>

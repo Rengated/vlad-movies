@@ -1,7 +1,8 @@
 import { FC, useContext } from "react";
 import { useRouter } from "next/router";
 import { Theme } from "@/store/theme";
-import changeTheme from "../../../public/static/theme.png";
+import moon from "../../../public/static/moon.svg";
+import sun from "../../../public/static/sun.svg";
 import Image from "next/image";
 import arrow from "../../../public/static/arrow.png";
 
@@ -19,11 +20,12 @@ export const Header: FC<HeaderProps> = ({ arrowBack }) => {
   };
   return (
     <header
-      className={`flex px-20  w-full py-1 border-b-2 justify-between items-center fixed top-0 left-0   ${
-        currentTheme == "black" ? "header-bg" : "A638EC0"
-      }`}
-      style={{ zIndex: 6 }}>
-      <h1 className="text-3xl flex text-white leading-loose ">YSMLreska</h1>
+      className={`flex px-20 py-3  w-full py-1 border-b-2 justify-between items-center fixed top-0 left-0`}
+      style={{
+        zIndex: 6,
+        backgroundColor: `${currentTheme == "black" ? "#310058" : "#546270"}`,
+      }}>
+      <h1 className="text-xl flex text-white leading-loose ">HDREZ</h1>
       <div className="flex items-center">
         {arrowBack && (
           <Image
@@ -36,7 +38,7 @@ export const Header: FC<HeaderProps> = ({ arrowBack }) => {
         <Image
           width={40}
           height={40}
-          src={changeTheme}
+          src={currentTheme == "black" ? moon : sun}
           className={`cursor-pointer ml-4 ${
             currentTheme !== "black" ? "invert" : ""
           }`}

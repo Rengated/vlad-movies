@@ -1,6 +1,7 @@
-import { FC, useState } from "react";
+import { FC, useContext, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { Theme } from "@/store/theme";
 
 interface CardProps {
   id: number;
@@ -10,7 +11,6 @@ interface CardProps {
   description: string;
   rating: string;
   genre: string;
-  filter: boolean;
 }
 
 export const Card: FC<CardProps> = ({
@@ -20,10 +20,10 @@ export const Card: FC<CardProps> = ({
   medium_cover_image,
   description,
   rating,
-  filter,
   genre,
 }) => {
   const [mouseOver, setMouseOver] = useState(false);
+  const { currentTheme } = useContext(Theme);
   const toggleMouseOver = () => setMouseOver((prev) => !prev);
 
   const router = useRouter();
@@ -31,7 +31,7 @@ export const Card: FC<CardProps> = ({
     router.push(`/movie/${id}`);
   };
 
-  if (!description && filter) {
+  if (!description) {
     return null;
   }
 
@@ -39,17 +39,25 @@ export const Card: FC<CardProps> = ({
     <div
       onMouseOver={toggleMouseOver}
       onMouseOut={toggleMouseOver}
-      className=" bg-white border border-black basis-80 object-cover rounded ml-5 mb-6 cursor-pointer relative"
+      className=" bg-white rounded-lg overflow-hidden border border-black basis-80 object-cover rounded ml-5 mb-6 cursor-pointer relative"
       onClick={!mouseOver ? onFilmClick : () => {}}>
       {mouseOver && (
         <div
-          className="absolute flex items-center justify-center flex-col text-center  bg-rose-200 p-5"
-          style={{ width: "317px", height: "477px" }}>
-          <h1 className="text-white text-3xl text-extrabold mb-3">{title}</h1>
-          <p className="text-lg">Rating: {rating}</p>
+          className="absolute flex items-center justify-center flex-col text-center p-5"
+          style={{
+            width: "320px",
+            height: "477px",
+            backgroundColor: `${
+              currentTheme == "black" ? "#2E438F" : "#BBA4CE"
+            }`,
+          }}>
+          <h1 className="text-white text-xl text-extrabold mb-3">{title}</h1>
+          <p className="text-lg text-white">
+            Rating: <b>{rating}</b>
+          </p>
           <button
             onClick={onFilmClick}
-            className="p-3 border-2 mt-5 border-black px-10 rounded-md border-white hover:bg-white ">
+            className="p-3 border-2 mt-5 rounded-lg px-10 rounded-md border-white text-white ">
             Details
           </button>
         </div>
@@ -61,12 +69,22 @@ export const Card: FC<CardProps> = ({
         alt={title}
       />
 
-      <div className="flex flex-col p-5 max-w-xs">
-        <span className="text-extrabold text-xl text-rose-400">
+      <div
+        className="flex flex-col p-5 max-w-xs h-full"
+        style={{
+          backgroundColor: `${currentTheme == "black" ? "white" : "#A2B0BC"}`,
+        }}>
+        <span
+          className="text-extrabold text-xl"
+          style={{
+            color: `${currentTheme == "black" ? "#2E438F" : "white"}`,
+          }}>
           {title} {year}
         </span>
-        <span>{description?.slice(0, 60)}...</span>
-        <span className="mt-auto font-extrabold">{genre}</span>
+        <span className="text-black font-extralight">
+          {description?.slice(0, 60)}...
+        </span>
+        <span className=" font-extrabold ">{genre}</span>
       </div>
     </div>
   );

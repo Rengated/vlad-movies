@@ -1,5 +1,5 @@
 {
-  "name": "anna-movies",
+  "name": "vlad-movies",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -13,8 +13,8 @@
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
-    "react-loader-spinner": "^6.1.0",
-    "react-responsive-pagination": "^2.2.4"
+    "react-infinite-scroll-component": "^6.1.0",
+    "react-loader-spinner": "^6.1.0"
   },
   "devDependencies": {
     "@types/node": "^20",

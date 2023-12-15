@@ -3,7 +3,7 @@ import { getFilmById } from "@/api";
 import { FC, useContext, useEffect, useState } from "react";
 import { MovieList } from "@/api";
 import { useParams } from "next/navigation";
-import { Audio } from "react-loader-spinner";
+import { Hourglass } from "react-loader-spinner";
 import { useComments } from "../../hooks/useComments";
 import { Header } from "@/components/Header/Header";
 import { Theme } from "@/store/theme";
@@ -12,6 +12,7 @@ import cd from "../../../public/static/cd.png";
 import file from "../../../public/static/file.png";
 import res from "../../../public/static/res.png";
 import Image from "next/image";
+import { Footer } from "@/components/Footer";
 
 const Details: FC = () => {
   const [movieDetails, setMovieDetails] = useState<MovieList>();
@@ -49,7 +50,8 @@ const Details: FC = () => {
 
   return (
     <div
-      className={`py-20 ${currentTheme == "black" ? "Ob1127" : "A4C8F2"} bg`}>
+      className={`pt-20`}
+      style={{ backgroundColor: `${currentTheme == "black" ? "black" : ""}` }}>
       <Header arrowBack={true} />
       {!loading ? (
         <section className="min-h-screen flex items-center flex-col pb-20 px-4 relative">
@@ -84,14 +86,14 @@ const Details: FC = () => {
                   onClick={() => {
                     router.push(movieDetails?.url || "");
                   }}
-                  className="py-4 px-6 lex items-center justify-center border text-white bg-rose-300 font-extrabold cursor-pointer rounded-md hover:bg-rose-600">
+                  className="py-4 px-6 lex items-center justify-center border text-white  font-extrabold cursor-pointer rounded-lg bg-gray-500 hover:bg-black">
                   Watch now
                 </button>
                 <button
                   onClick={() => {
                     setShowDownlad(true);
                   }}
-                  className="py-4 px-6 flex-items-center justify-center border bg-rose-300 font-extrabold cursor-pointer text-white rounded-md hover:bg-rose-600">
+                  className="py-4 px-6 flex-items-center justify-center border  font-extrabold cursor-pointer text-white rounded-lg bg-gray-500 hover:bg-black">
                   Download
                 </button>
               </div>
@@ -108,7 +110,7 @@ const Details: FC = () => {
                 Genres:
                 {movieDetails?.genres?.map((genre, index) => (
                   <b
-                    className="bg-rose-200 p-2 text-base rounded-md ml-2 mb-3"
+                    className="bg-gray-500 p-2 text-base rounded-lg ml-2 mb-3"
                     key={index}>
                     {genre}
                   </b>
@@ -129,7 +131,7 @@ const Details: FC = () => {
                     <a
                       href={torrent.url}
                       key={index}
-                      className="flex border-2  bg-rose-300 p-5 text-black mb-2 rounded-md items-center border-transparent hover:bg-rose-500">
+                      className="flex border-2  bg-black p-5 bg-gray-500 text-black mb-2 rounded-md items-center border-transparent hover:bg-black">
                       <Image
                         src={res}
                         alt="res"
@@ -160,25 +162,46 @@ const Details: FC = () => {
             </div>
           </div>
           <div className="container flex flex-col">
-            <p className="text-3xl text-rose-500 mb-5">Comments</p>
-            <p className="text-white mb-2">Name</p>
+            <p className="text-3xl text-white mb-5">Comments</p>
+            <p
+              className="text-white mb-2"
+              style={{
+                color: `${currentTheme == "black" ? "white" : "black"}`,
+              }}>
+              Name
+            </p>
             <input
               name="name"
               onChange={onCommentChange}
+              style={{
+                color: `${currentTheme == "black" ? "white" : "black"}`,
+              }}
               value={comment.name}
               type="text"
               className="w-80 bg-transparent border-2 p-2 mb-2 rounded-md text-white"
             />
-            <p className="text-white mb-2">Comment</p>
+            <p
+              className="text-white mb-2"
+              style={{
+                color: `${currentTheme == "black" ? "white" : "black"}`,
+              }}>
+              Comment
+            </p>
             <textarea
               value={comment.text}
               onChange={onCommentChange}
+              style={{
+                color: `${currentTheme == "black" ? "white" : "black"}`,
+              }}
               name="text"
               className="w-full bg-transparent border-2 p-2 rounded-md text-white"
             />
             <button
               onClick={onSendComment}
-              className="ml-auto text-white border-2 rounded-md p-3 mt-3 hover:bg-black">
+              className="ml-auto text-white border-2 rounded-md p-3 mt-3 bg-none hover:bg-gray-200"
+              style={{
+                color: `${currentTheme == "black" ? "white" : "black"}`,
+              }}>
               Send
             </button>
             <div className="flex flex-col mt-10">
@@ -186,7 +209,7 @@ const Details: FC = () => {
                 comments?.map((comment, index) => (
                   <div
                     key={index}
-                    className="flex flex-col border bg-gray-800 w-full p-5 text-white rounded-md mb-3">
+                    className="flex flex-col border bg-gray-500 w-full p-5 text-white rounded-md mb-3">
                     <p className="text-xl extrabold mb-2">{comment.name}</p>
                     <p className="text-gray-500">{comment.text}</p>
                     <button
@@ -201,7 +224,7 @@ const Details: FC = () => {
         </section>
       ) : (
         <div className="flex justify-center items-center min-w-full min-h-screen">
-          <Audio
+          <Hourglass
             height="80"
             width="80"
             radius="9"
@@ -210,6 +233,7 @@ const Details: FC = () => {
           />
         </div>
       )}
+      <Footer />
     </div>
   );
 };

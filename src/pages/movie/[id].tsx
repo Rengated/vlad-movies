@@ -161,7 +161,7 @@ const Details: FC = () => {
               </div>
             </div>
           </div>
-          <div className="container flex flex-col">
+          <div className="container flex flex-col flex items-center flex-col w-full">
             <p className="text-3xl text-white mb-5">Comments</p>
             <p
               className="text-white mb-2"
@@ -194,17 +194,18 @@ const Details: FC = () => {
                 color: `${currentTheme == "black" ? "white" : "black"}`,
               }}
               name="text"
-              className="w-full bg-transparent border-2 p-2 rounded-md text-white"
+              className=" bg-transparent border-2 p-2 rounded-md text-white w-80"
             />
             <button
               onClick={onSendComment}
-              className="ml-auto text-white border-2 rounded-md p-3 mt-3 bg-none hover:bg-gray-200"
+              className=" border rounded-md p-3 mt-3 bg-none"
               style={{
                 color: `${currentTheme == "black" ? "white" : "black"}`,
+                borderColor: `${currentTheme == "black" ? "white" : "black"}`,
               }}>
               Send
             </button>
-            <div className="flex flex-col mt-10">
+            <div className="flex flex-col mt-10 w-full">
               {comments &&
                 comments?.map((comment, index) => (
                   <div

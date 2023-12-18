@@ -21,6 +21,7 @@ export default function Home() {
       setLoading(true);
       const response = await getFilms(String(currentPage));
       setFilms(response.movies);
+      setCurrentPage((prev) => prev + 1);
       setLoading(false);
     };
     fetch();

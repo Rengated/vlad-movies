@@ -212,7 +212,7 @@ const Details: FC = () => {
                     key={index}
                     className="flex flex-col border bg-gray-500 w-full p-5 text-white rounded-md mb-3">
                     <p className="text-xl extrabold mb-2">{comment.name}</p>
-                    <p className="text-gray-500">{comment.text}</p>
+                    <p className="text-gray-200">{comment.text}</p>
                     <button
                       onClick={() => deleteComment(comment)}
                       className="ml-auto font-extrabold hover:text-rose-200">

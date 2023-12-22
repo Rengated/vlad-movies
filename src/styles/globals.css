@@ -29,3 +29,15 @@
 }
 
  
+
+.bg-movie{
+    background-image: url('../../public/static/bg-movie.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.bg{
+    background-image: url('../../public/static/bg.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+}

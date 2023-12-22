@@ -4,7 +4,6 @@ import { Theme } from "@/store/theme";
 import moon from "../../../public/static/moon.svg";
 import sun from "../../../public/static/sun.svg";
 import Image from "next/image";
-import arrow from "../../../public/static/arrow.png";
 
 interface HeaderProps {
   arrowBack: boolean;
@@ -28,12 +27,12 @@ export const Header: FC<HeaderProps> = ({ arrowBack }) => {
       <h1 className="text-xl flex text-white leading-loose ">HDREZ</h1>
       <div className="flex items-center">
         {arrowBack && (
-          <Image
-            src={arrow}
-            alt="arrow"
-            onClick={onArrowClick}
-            className="invert cursor-pointer"
-          />
+          <div
+            className="mr-2 cursor-pointer text-white"
+            onClick={onArrowClick}>
+            <span className="mr-2 text-xl font-extrabold">{`<`}</span>
+            <span className="text-xl">Вернуться</span>
+          </div>
         )}
         <Image
           width={40}

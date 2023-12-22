@@ -50,7 +50,7 @@ const Details: FC = () => {
 
   return (
     <div
-      className={`pt-20`}
+      className={`pt-20 bg-movie`}
       style={{ backgroundColor: `${currentTheme == "black" ? "black" : ""}` }}>
       <Header arrowBack={true} />
       {!loading ? (
@@ -162,9 +162,15 @@ const Details: FC = () => {
             </div>
           </div>
           <div className="container flex flex-col flex items-center flex-col w-full">
-            <p className="text-3xl text-white mb-5">Comments</p>
             <p
-              className="text-white mb-2"
+              className="text-3xl  mb-5"
+              style={{
+                color: `${currentTheme == "black" ? "white" : "black"}`,
+              }}>
+              Comments
+            </p>
+            <p
+              className="text-white mb-4"
               style={{
                 color: `${currentTheme == "black" ? "white" : "black"}`,
               }}>
@@ -178,10 +184,10 @@ const Details: FC = () => {
               }}
               value={comment.name}
               type="text"
-              className="w-80 bg-transparent border-2 p-2 mb-2 rounded-md text-white"
+              className="w-full bg-transparent border-2 p-2 mb-5 rounded-lg text-white"
             />
             <p
-              className="text-white mb-2"
+              className="text-white mb-4"
               style={{
                 color: `${currentTheme == "black" ? "white" : "black"}`,
               }}>
@@ -194,11 +200,11 @@ const Details: FC = () => {
                 color: `${currentTheme == "black" ? "white" : "black"}`,
               }}
               name="text"
-              className=" bg-transparent border-2 p-2 rounded-md text-white w-80"
+              className=" bg-transparent border-2 p-2 rounded-lg text-white w-full"
             />
             <button
               onClick={onSendComment}
-              className=" border rounded-md p-3 mt-3 bg-none"
+              className=" border rounded-lg p-3 bg-none ml-auto mt-4"
               style={{
                 color: `${currentTheme == "black" ? "white" : "black"}`,
                 borderColor: `${currentTheme == "black" ? "white" : "black"}`,

@@ -50,7 +50,9 @@ const Details: FC = () => {
 
   return (
     <div
-      className={`pt-20 bg-movie`}
+      className={`pt-20 bg-movie ${
+        currentTheme !== "black" ? "bg-movie_invert" : ""
+      }`}
       style={{ backgroundColor: `${currentTheme == "black" ? "black" : ""}` }}>
       <Header arrowBack={true} />
       {!loading ? (

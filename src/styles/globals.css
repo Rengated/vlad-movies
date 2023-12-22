@@ -41,3 +41,13 @@
     background-size: contain;
     background-repeat: no-repeat;
 }
+
+.bg-movie_invert{
+    background-image: url('../../public/static/bg-movie_invert.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.bg_invert{
+    background-image: url('../../public/static/bg_invert.png');
+}

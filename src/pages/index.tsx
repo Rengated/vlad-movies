@@ -35,7 +35,7 @@ export default function Home() {
   };
   return (
     <div
-      className={`pt-20 bg`}
+      className={`pt-20 bg ${currentTheme == "black" ? "bg_invert" : ""}`}
       style={{ backgroundColor: `${currentTheme == "black" ? "black" : ""}` }}>
       <Header arrowBack={false} />
       {!loading ? (

@@ -38,7 +38,7 @@ export type MovieList = {
   }[];
 };
 
-export const getFilms = async (currentPage: string) => {
+export const getFilms = async (currentPage: string, query: string) => {
   const response = await instance.get<{
     data: {
       movie_count: number;
@@ -46,7 +46,7 @@ export const getFilms = async (currentPage: string) => {
       page_count: number;
       movies: MovieList[];
     };
-  }>(`list_movies.json?page=${currentPage}&limit=${8}`);
+  }>(`list_movies.json?page=${currentPage}&limit=${8}&query_term=${query}`);
   return response.data.data;
 };
 
